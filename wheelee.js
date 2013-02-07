@@ -1,8 +1,8 @@
 (function() {
   data = wheeleeData();
   hex = hexColor();
-  w = 472;
-  h = 472;
+  w = 420;
+  h = 420;
 
   hilightDuration = 3000; //milliseconds
   tweenDuration = 500; //milliseconds
@@ -20,7 +20,7 @@
 
   //make doughnut fit the full width/height of the canvas with space for 20px expansion
   outerRadius = (w / 2) - 20;
-  innerRadius = outerRadius - 100;
+  innerRadius = outerRadius - 90;
 
   //arc template for regular arc
   arc = d3.svg.arc()
