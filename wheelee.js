@@ -19,6 +19,10 @@
     .append("g")
       .attr("transform", "translate(27,27)");
 
+  //title element is not displayed - used for accessability
+  svgContainer.append("title")
+    .text(config.title);
+
   outerRadius = 157;
   innerRadius = outerRadius - 75;
 
