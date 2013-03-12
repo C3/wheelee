@@ -172,6 +172,7 @@
       .attr("d", expandedArc);
 
     updateText(d3Arcs[i]["title"], d3Arcs[i]["percent"])
+    boldLegend(i);
   }
 
   function shrinkAllArcs(){
@@ -179,6 +180,11 @@
       .transition()
       .attr("class", "arc")
       .attr("d", arc);
+  }
+
+  function boldLegend(i){
+    d3.selectAll(".legend").classed("bold", false);
+    d3.select(d3.selectAll(".legend")[0][i]).classed("bold", true);
   }
 
   function updateIndex(i){
