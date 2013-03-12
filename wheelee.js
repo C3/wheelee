@@ -1,6 +1,5 @@
 (function() {
-  data = wheeleeData();
-  hex = hexColor();
+  config = wheeleeConfig();
   w = 653;
   h = 405;
   wheelee_x_pos = 450;
@@ -38,12 +37,12 @@
   startAngle = 0; // in radians - this is the top of the circle
 
   //base fill colour for arcs
-  color = d3.rgb(hex);
-  colorIncremnet = lightenBy()/d3.keys(data).length;
+  color = d3.rgb(config['color']);
+  colorIncremnet = config['lightenGamma']/d3.keys(config['data']).length;
 
   //make json object of arcs data
   d3Arcs = []
-  d3.map(data).forEach(function(key, percent) {
+  d3.map(config['data']).forEach(function(key, percent) {
     lengthOfArc = circumference * (percent/100);
     radiansOfCentralAngle = lengthOfArc/outerRadius;
     endAngle = startAngle + radiansOfCentralAngle;
@@ -146,7 +145,7 @@
   }
 
   function updateIndex(i){
-    if(i == Object.keys(data).length - 1){
+    if(i == Object.keys(config['data']).length - 1){
       i = 0;
     } else {
       i += 1;
