@@ -63,31 +63,36 @@
     color = color.brighter(colorIncremnet)
   });
 
-  //display paths
-  path = svgContainer.selectAll("path")
-    .data(d3Arcs)
-    .enter()
-      .append("path")
-      .attr("d", arc)
-      .on("mouseover", hoverInArc)
-      .on("mouseout", hoverOutArc)
-      .attr("transform", "translate(" + wheelee_x_pos + ", " + wheelee_y_pos + ")")
-      .attr("fill", function(d, i) { return d["fill"].toString(); })
-      .attr("class", function(d, i) { return d["class"]; });
+  chartPie({svg: svgContainer, arcs: d3Arcs});
 
-  //add title
-  titleText = svgContainer.append("text")
-    .attr("x", wheelee_x_pos)
-    .attr("y", wheelee_y_pos)
-    .style('opacity', 0)
-    .attr("class", "title legend");
+  chartText({svg: svgContainer});
 
-  //add percent
-  percentText = svgContainer.append("text")
-    .attr("x", wheelee_x_pos)
-    .attr("y", wheelee_y_pos + 30)
-    .style('opacity', 0)
-    .attr("class", "percent legend");
+  function chartPie(config) {
+    path = config.svg.selectAll("path")
+      .data(config.arcs)
+      .enter()
+        .append("path")
+        .attr("d", arc)
+        .on("mouseover", hoverInArc)
+        .on("mouseout", hoverOutArc)
+        .attr("transform", "translate(" + wheelee_x_pos + ", " + wheelee_y_pos + ")")
+        .attr("fill", function(d, i) { return d["fill"].toString(); })
+        .attr("class", function(d, i) { return d["class"]; });
+  }
+
+  function chartText(config) {
+    titleText = config.svg.append("text")
+      .attr("x", wheelee_x_pos)
+      .attr("y", wheelee_y_pos)
+      .style('opacity', 0)
+      .attr("class", "title legend");
+
+    percentText = config.svg.append("text")
+      .attr("x", wheelee_x_pos)
+      .attr("y", wheelee_y_pos + 30)
+      .style('opacity', 0)
+      .attr("class", "percent legend");
+  }
 
   function updateText(title, percent){
     //fade out current
