@@ -66,9 +66,42 @@
     color = color.brighter(colorIncremnet)
   });
 
+  chartLegend({svg: svgContainer, categories: d3Arcs});
+
   chartPie({svg: svgContainer, arcs: d3Arcs});
 
   chartText({svg: svgContainer});
+
+  function chartLegend(config) {
+    var legend = config.svg.selectAll(".legend")
+    .data(config.categories)
+    .enter()
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + (100 + (i * 36)) + ")"; });
+
+    legend.append("rect")
+      .attr("x", 0)
+      .attr("width", 51)
+      .attr("height", 28)
+      .style("fill", function(d) { return d["fill"].toString(); });
+
+    legend.append("text")
+      .attr("x", 65)
+      .attr("y", 14)
+      .attr("dy", ".35em")
+      .attr("class", "category")
+      .style("text-anchor", "start")
+      .text(function(d) { return d["title"]; });
+
+    legend.append("text")
+      .attr("x", 205)
+      .attr("y", 14)
+      .attr("dy", ".35em")
+      .attr("class", "value")
+      .style("text-anchor", "start")
+      .text(function(d) { return d["percent"]; });
+  }
 
   function chartPie(config) {
     path = config.svg.selectAll("path")
@@ -88,13 +121,13 @@
       .attr("x", wheelee_x_pos)
       .attr("y", wheelee_y_pos)
       .style('opacity', 0)
-      .attr("class", "title legend");
+      .attr("class", "title info");
 
     percentText = config.svg.append("text")
       .attr("x", wheelee_x_pos)
       .attr("y", wheelee_y_pos + 30)
       .style('opacity', 0)
-      .attr("class", "percent legend");
+      .attr("class", "percent info");
   }
 
   function updateText(title, percent){
