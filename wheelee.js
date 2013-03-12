@@ -1,8 +1,10 @@
 (function() {
   data = wheeleeData();
   hex = hexColor();
-  w = 420;
-  h = 420;
+  w = 653;
+  h = 405;
+  wheelee_x_pos = 450;
+  wheelee_y_pos = 180;
 
   hilightDuration = 3000; //milliseconds
   tweenDuration = 500; //milliseconds
@@ -16,11 +18,10 @@
       .attr("width", w)
       .attr("height", h)
     .append("g")
-      .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
+      .attr("transform", "translate(27,27)");
 
-  //make doughnut fit the full width/height of the canvas with space for 20px expansion
-  outerRadius = (w / 2) - 20;
-  innerRadius = outerRadius - 90;
+  outerRadius = 157;
+  innerRadius = outerRadius - 75;
 
   //arc template for regular arc
   arc = d3.svg.arc()
@@ -30,7 +31,7 @@
   //arc template for hilighted arc
   expandedArc = d3.svg.arc()
     .innerRadius(innerRadius)
-    .outerRadius(outerRadius + 20);
+    .outerRadius(outerRadius + 16);
 
   //maths shit
   circumference = 2 * Math.PI * outerRadius;
@@ -51,7 +52,7 @@
       "innerRadius": innerRadius,
       "outerRadius": outerRadius,
       "startAngle": startAngle,
-      "endAngle": endAngle - 0.01, //0.01 gives baby gap between arcs
+      "endAngle": endAngle - 0.015, //gives baby gap between arcs
       "fill": color,
       "class": "arc",
       "title": key,
@@ -70,20 +71,21 @@
       .attr("d", arc)
       .on("mouseover", hoverInArc)
       .on("mouseout", hoverOutArc)
+      .attr("transform", "translate(" + wheelee_x_pos + ", " + wheelee_y_pos + ")")
       .attr("fill", function(d, i) { return d["fill"].toString(); })
       .attr("class", function(d, i) { return d["class"]; });
 
   //add title
   titleText = svgContainer.append("text")
-    .attr("x", 0)
-    .attr("y", 0)
+    .attr("x", wheelee_x_pos)
+    .attr("y", wheelee_y_pos)
     .style('opacity', 0)
     .attr("class", "title legend");
 
   //add percent
   percentText = svgContainer.append("text")
-    .attr("x", 0)
-    .attr("y", 30)
+    .attr("x", wheelee_x_pos)
+    .attr("y", wheelee_y_pos + 30)
     .style('opacity', 0)
     .attr("class", "percent legend");
 
