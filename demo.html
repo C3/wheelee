@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Wheelee - an interactive pie chart</title>
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; }
+
+      #wheelee {
+        background-color: #ededed;
+        position: relative;
+        margin-top: 10px;
+        width: 681px;
+      }
+
+      #wheelee h2{
+        font-size: 20px;
+        line-height: 130%;
+        position: absolute;
+        top: 33px;
+        left: 27px;
+        max-width: 235px;
+        margin: 0;
+      }
+
+      .arc:hover { cursor: pointer; }
+      .info { font-size: 16px; }
+      .legend { font-size: 14px; }
+      .bold { font-weight: bold;}
+
+      .info, .legend {
+        fill: #464A51;
+        text-anchor: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wheelee - an interactive pie chart using D3</h1>
+    <p>Find out more about D3: <a href="http://d3js.org/">d3js.org</a></p>
+    <div id="wheelee">
+      <h2>Cat popularity by breed</h2>
+    </div>
+
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="wheelee.js" /></script>
+    <script>
+      d3.select("#wheelee").wheelify({
+        'title': 'Popularity of cats by breed',
+        'data': { 'Persian':    22,
+                  'Maine Coon': 20,
+                  'Exotic':     16,
+                  'Siamese':    13,
+                  'Abyssinian': 12,
+                  'Ragdoll':    11,
+                  'Birman':     6 },
+        'color': '#004dec',
+        'lightenGamma': 3.2 });
+    </script>
+  </body>
+</html>
