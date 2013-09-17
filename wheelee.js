@@ -168,7 +168,7 @@
     function hilightArc(d, i){
       d3.select(d).transition()
         .duration(tweenDuration)
-        .attr("class", "active-arc")
+        .attr("class", "arc active-arc")
         .attr("d", expandedArc);
 
       updateText(d3Arcs[i]["title"], d3Arcs[i]["percent"])
