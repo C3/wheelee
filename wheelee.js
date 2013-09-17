@@ -36,7 +36,7 @@
       .innerRadius(innerRadius)
       .outerRadius(outerRadius + 16);
 
-    //maths shit
+    //maths stuff
     circumference = 2 * Math.PI * outerRadius;
     startAngle = 0; // in radians - this is the top of the circle
 
